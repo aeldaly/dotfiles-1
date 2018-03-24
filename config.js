@@ -43,28 +43,19 @@ module.exports = {
     'wget --enable-iri'
   ],
   cask: [
-    //'adium',
-    //'amazon-cloud-drive',
-    //'atom',
-    // 'box-sync',
-    //'comicbooklover',
-    //'diffmerge',
-    //'dropbox',
-    //'evernote',
+    'sourcetree',
+    'onedrive',
+    'evernote',
     'gpgtools',
-    //'ireadfast',
+    'ireadfast',
     'iterm2',
     'little-snitch',
     'micro-snitch',
-    //'macvim',
     'sizeup',
-    //'sketchup',
+    'sketchup',
     'slack',
     'the-unarchiver',
-    //'torbrowser',
-    //'transmission',
-    //'vlc',
-    'xquartz'
+    'visual-studio-code'
   ],
   gem: [
     'git-up'
