@@ -1,37 +1,78 @@
-# Path to your oh-my-zsh configuration.
-export ZSH=$HOME/.dotfiles/oh-my-zsh
-# if you want to use this, change your non-ascii font to Droid Sans Mono for Awesome
-# POWERLEVEL9K_MODE='awesome-patched'
-export ZSH_THEME="powerlevel9k/powerlevel9k"
-POWERLEVEL9K_SHORTEN_DIR_LENGTH=2
-# https://github.com/bhilburn/powerlevel9k#customizing-prompt-segments
-# https://github.com/bhilburn/powerlevel9k/wiki/Stylizing-Your-Prompt
-POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(dir nvm vcs)
-POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status history time)
-# colorcode test
-# for code ({000..255}) print -P -- "$code: %F{$code}This is how your text would look like%f"
-POWERLEVEL9K_NVM_FOREGROUND='000'
-POWERLEVEL9K_NVM_BACKGROUND='072'
-POWERLEVEL9K_SHOW_CHANGESET=true
-#export ZSH_THEME="random"
+setopt nonomatch
+setopt re_match_pcre
+setopt EXTENDED_GLOB
 
-# Set to this to use case-sensitive completion
-export CASE_SENSITIVE="true"
+zstyle ':completion:*' rehash true
 
-# disable weekly auto-update checks
-# export DISABLE_AUTO_UPDATE="true"
+export GREP_OPTIONS='--color=always'
+export DISABLE_UPDATE_PROMPT=true
+export DISABLE_AUTO_UPDATE=true
+export HOMEBREW_BRWEFILE_APPSTORE=0
+export HOMEBREW_BREWFILE_APPSTORE=0
 
-# disable colors in ls
-# export DISABLE_LS_COLORS="true"
+# # # Credit: https://kev.inburke.com/kevin/profiling-zsh-startup-time/
 
-# disable autosetting terminal title.
-export DISABLE_AUTO_TITLE="true"
+export PROFILE_STARTUP=false
+if [[ "$PROFILE_STARTUP" == true ]]; then
+    zmodload zsh/zprof # Output load-time statistics
+    # http://zsh.sourceforge.net/Doc/Release/Prompt-Expansion.html
+    PS4=$'%D{%M%S%.} %N:%i> '
+    exec 3>&2 2>"${XDG_CACHE_HOME:-$HOME/tmp}/zsh_startup.$$"
+    setopt xtrace prompt_subst
+fi
 
-# Which plugins would you like to load? (plugins can be found in ~/.dotfiles/oh-my-zsh/plugins/*)
-# Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(colorize compleat dirpersist autojump git gulp history cp)
+source /usr/local/share/antigen/antigen.zsh
 
-source $ZSH/oh-my-zsh.sh
+antigen use oh-my-zsh
+
+antigen bundles <<EOBUNDLES
+RobSis/zsh-reentry-hook
+the8/terminal-app.zsh
+unixorn/tumult.plugin.zsh
+ruby
+gem
+ssh-agent
+rake-fast
+osx
+brew
+colored-man-pages
+Tarrasch/zsh-autoenv
+extract
+emoji
+gitfast
+git-extras
+aws
+gpg-agent
+jsontools
+golang
+sudo
+xcode
+python
+pyenv
+gnu-utils
+bundler
+zsh-users/zsh-autosuggestions
+zsh-users/zsh-completions
+
+zsh-users/zsh-syntax-highlighting
+
+zsh-users/zsh-history-substring-search
+
+tylerreckart/odin
+wesbos/Cobalt2-iterm.git
+EOBUNDLES
+
+# antigen use git
+# antigen use command-not-found
+# antigen use gulp
+# antigen use history
+# antigen use cp
+# antigen use colorize
+# antigen use compleat
+# antigen use dirpersist
+# antigen use autojump
+
+antigen theme agnoster
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
@@ -53,3 +94,5 @@ unsetopt correct
 
 # run fortune on new terminal :)
 fortune
+
+antigen apply

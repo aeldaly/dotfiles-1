@@ -364,7 +364,7 @@ sudo defaults write /Library/Preferences/com.apple.loginwindow SHOWFULLNAME -boo
 sudo defaults write /Library/Preferences/com.apple.loginwindow GuestEnabled -bool false
 
 # Automatically lock the login keychain for inactivity after 6 hours
-security set-keychain-settings -t 21600 -l ~/Library/Keychains/login.keychain
+# security set-keychain-settings -t 21600 -l ~/Library/Keychains/login.keychain
 
 # Destroy FileVault key when going into standby mode, forcing a re-auth.
 # Source: https://web.archive.org/web/20160114141929/http://training.apple.com/pdf/WP_FileVault2.pdf
@@ -406,12 +406,12 @@ sudo tmutil disablelocal;ok
 # running "Disable hibernation (speeds up entering sleep mode)"
 # sudo pmset -a hibernatemode 0;ok
 
-running "Remove the sleep image file to save disk space"
-sudo rm -rf /Private/var/vm/sleepimage;ok
-running "Create a zero-byte file instead"
-sudo touch /Private/var/vm/sleepimage;ok
-running "…and make sure it can’t be rewritten"
-sudo chflags uchg /Private/var/vm/sleepimage;ok
+# running "Remove the sleep image file to save disk space"
+# sudo rm -rf /Private/var/vm/sleepimage;ok
+# running "Create a zero-byte file instead"
+# sudo touch /Private/var/vm/sleepimage;ok
+# running "…and make sure it can’t be rewritten"
+# sudo chflags uchg /Private/var/vm/sleepimage;ok
 
 #running "Disable the sudden motion sensor as it’s not useful for SSDs"
 sudo pmset -a sms 0;ok
@@ -476,8 +476,8 @@ sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.serve
 ################################################
 bot "Standard System Changes"
 ################################################
-running "always boot in verbose mode (not MacOS GUI mode)"
-sudo nvram boot-args="-v";ok
+# running "always boot in verbose mode (not MacOS GUI mode)"
+# sudo nvram boot-args="-v";ok
 
 running "allow 'locate' command"
 sudo launchctl load -w /System/Library/LaunchDaemons/com.apple.locate.plist > /dev/null 2>&1;ok
@@ -662,8 +662,8 @@ defaults write com.apple.finder DisableAllAnimations -bool true;ok
 # running "Show hidden files by default"
 # defaults write com.apple.finder AppleShowAllFiles -bool true;ok
 
-running "Show all filename extensions"
-defaults write NSGlobalDomain AppleShowAllExtensions -bool true;ok
+# running "Show all filename extensions"
+# defaults write NSGlobalDomain AppleShowAllExtensions -bool true;ok
 
 running "Show status bar"
 defaults write com.apple.finder ShowStatusBar -bool true;ok
